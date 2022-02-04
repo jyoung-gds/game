@@ -14,17 +14,7 @@ public class Game {
   }
 
   public String getWordToGuess() {
-    StringBuilder hiddenWord = new StringBuilder();
-    hiddenWord.append(wordToGuess.charAt(0));
-    for (int i = 1; i < wordToGuess.length(); i++) {
-      if (this.guessedLetters.contains(wordToGuess.charAt(i))) {
-        hiddenWord.append(wordToGuess.charAt(i));
-      }
-      else {
-        hiddenWord.append("_");
-      }
-    }
-    return hiddenWord.toString();
+    return Masker.getWordToGuess(wordToGuess, guessedLetters);
   }
 
   public Integer getRemainingAttempts() {
