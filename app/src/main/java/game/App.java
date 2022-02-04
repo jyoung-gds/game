@@ -3,12 +3,40 @@
  */
 package game;
 
+import java.util.Scanner;
+
 public class App {
+
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
+        WordChooser chooser = new WordChooser();
+        Game game = new Game(chooser);
         System.out.println(new App().getGreeting());
+        System.out.println("Welcome! Today the word to guess is: ");
+        while (true) {
+            System.out.println(game.getWordToGuess());
+            Scanner playerGuess = new Scanner(System.in);
+            System.out.println("Enter one letter to guess (" + game.getRemainingAttempts() + " attempts remaining)");
+            char guessedLetter = playerGuess.nextLine().charAt(0);
+            boolean outcome = game.guessLetter(guessedLetter);
+            if (outcome == true) {
+                System.out.println("Right!");
+            }
+            else if (outcome == false) {
+                System.out.println("Wrong...");
+            }
+            if (game.isGameLost() == true) {
+                System.out.println("You have 0 lives left. You lose.");
+                break;
+            }
+            else if (game.isGameWon() == true) {
+                System.out.println("Congratulations! You win! The word was:");
+                System.out.println(game.getWordToGuess());
+                break;
+            }
+        }
     }
 }
