@@ -14,11 +14,10 @@ public class App {
     public static void main(String[] args) {
         WordChooser chooser = new WordChooser();
         Game game = new Game(chooser);
-        System.out.println(new App().getGreeting());
         System.out.println("Welcome! Today the word to guess is: ");
+        Scanner playerGuess = new Scanner(System.in);
         while (true) {
             System.out.println(game.getWordToGuess());
-            Scanner playerGuess = new Scanner(System.in);
             System.out.println("Enter one letter to guess (" + game.getRemainingAttempts() + " attempts remaining)");
             char guessedLetter = playerGuess.nextLine().charAt(0);
             boolean outcome = game.guessLetter(guessedLetter);
@@ -38,5 +37,6 @@ public class App {
                 break;
             }
         }
+        playerGuess.close();
     }
 }
